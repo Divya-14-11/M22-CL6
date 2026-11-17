@@ -39,3 +39,13 @@ s = StandardScaler()
 xtrain = s.fit_transform(xtrain)
 xtest = s.fit_transform(xtest)
 
+classifier = Sequential()
+classifier.add(Dense(units = 6,kernel_initializer = "he_uniform", activation = "relu", input_dim = 10))
+classifier.add(Dense(units = 6,kernel_initializer = "he_uniform", activation = "relu"))
+classifier.add(Dense(units = 1,kernel_initializer = "glorot_uniform", activation = "sigmoid"))
+
+classifier.compile(optimizer = "Adamax", loss = "binary_crossentropy", metrics = ["accuracy"])
+model_history = classifier.fit(xtrain,ytrain,batch_size = 10, epochs = 100)
+classifier.summary()
+yprediction = classifier.predict(xtest)
+print(yprediction)
